@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-let stocks: Array<String> = ['AAPL', 'GOOG', 'FB', 'AMZN', 'TWTR'];
+let stocks: Array<string> = ['AAPL', 'GOOG', 'FB', 'AMZN', 'TWTR'];
 let service: string = 'https://angular2-in-action-api.herokuapp.com';
 
-export interface  StockInterface {
+export interface StockInterface {
   symbol: string;
   lastTradePriceOnly: number;
   change: number;
@@ -15,8 +15,7 @@ export interface  StockInterface {
   providedIn: 'root'
 })
 export class EstoqueService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   get() {
     return stocks.slice();
@@ -28,13 +27,15 @@ export class EstoqueService {
   }
 
   remove(stock) {
-    stock.splice(stocks.indexOf(stock),1);
+    stock.splice(stocks.indexOf(stock), 1);
     return this.get();
   }
 
   load(symbols) {
     if (symbols) {
-      return this.http.get<Array<StockInterface>>(service + '/stocks/snapshot?symbols=' + symbols.join());
+      return this.http.get<Array<StockInterface>>(
+        service + '/stocks/snapshot?symbols=' + symbols.join()
+      );
     }
   }
 }
